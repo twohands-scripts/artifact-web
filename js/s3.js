@@ -73,7 +73,7 @@ async function loadPaks(tbl) {
 
     loadEach('paks', (file) => {
 
-        if (file.Platform === 'ios') {
+        if (file.Platform === 'iOS') {
             file.Link = `itms-services://?action=download-manifest&url=${awsS3Url}/${Bucket}/paks/champs`;
             file.Link += `/${file.Server}/ios/Info.plist`
         }
