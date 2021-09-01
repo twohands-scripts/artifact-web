@@ -74,8 +74,9 @@ async function loadPaks(tbl) {
     loadEach('paks', (file) => {
 
         if (file.Platform === 'iOS') {
-            file.Link = `itms-services://?action=download-manifest&url=${awsS3Url}/${Bucket}/paks/${file.Project.toLowerCase()}`;
-            file.Link += `/${file.Server}/ios/Info.plist`
+            file.Link = `itms-services://?action=download-manifest&url=`;
+            file.Link += `${awsS3Url}/${Bucket}/paks/${file.Project.toLowerCase()}`;
+            file.Link += `/${file.Server}/ios/Info.plist`;
         }
 
         tbl.row.add([
