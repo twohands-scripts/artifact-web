@@ -80,13 +80,11 @@ async function loadPaks(tbl) {
         }
 
         tbl.row.add([
-            moment(file.LastModified).format('YYYY-MM-DD hh:mm:ss A'),
             file.Project,
-            file.Server,
-            file.Platform,
-            file.Version,
-            Math.round(file.Size / Math.pow(1024, 2), 2) + ' MB',
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`,
+            `[${file.Server}] ${file.Platform}_${file.Version}`,
+            moment(file.LastModified).format('YYYY-MM-DD hh:mm:ss A'),
+            Math.round(file.Size / Math.pow(1024, 2), 2) + ' MB'
         ]);
 
         tbl.draw();
