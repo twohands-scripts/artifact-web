@@ -104,7 +104,7 @@ async function loadArchive(tbl) {
             file.Version,
             file.Name,
             Math.round(file.Size / Math.pow(1024, 2), 2) + ' MB',
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Download</a>`
         ]);
 
         tbl.draw();
