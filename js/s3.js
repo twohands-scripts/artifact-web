@@ -26,6 +26,14 @@ function runCommand(cmd, params) {
     });
 };
 
+function toSize(bytes) {
+
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+}
+
 async function loadEach(Prefix, cb) {
 
     let params = Prefix ? { Prefix } : {};
@@ -58,7 +66,7 @@ async function loadEach(Prefix, cb) {
                 Name: name, 
                 Version: Metadata.version ?? '', 
                 LastModified, 
-                Size, 
+                Size: toSize(Size), 
                 StorageClass,
                 Link
             });
@@ -84,7 +92,7 @@ async function loadPaks(tbl) {
             `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`,
             `[${file.Server}] ${file.Platform}_${file.Version}`,
             moment(file.LastModified).format('YYYY-MM-DD hh:mm:ss A'),
-            Math.round(file.Size / Math.pow(1024, 2), 2) + ' MB'
+            file.Size
         ]);
 
         tbl.draw();
@@ -103,7 +111,7 @@ async function loadArchive(tbl) {
             file.Server,
             file.Version,
             file.Name,
-            Math.round(file.Size / Math.pow(1024, 2), 2) + ' MB',
+            file.Size,
             `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Download</a>`
         ]);
 
