@@ -91,7 +91,7 @@ async function loadPaks(tbl) {
             file.Project,
             `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`,
             `[${file.Server}] ${file.Platform}_${file.Version}`,
-            moment(file.LastModified).format('YYYY-MM-DD hh:mm:ss A'),
+            moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Size
         ]);
 
@@ -106,7 +106,7 @@ async function loadArchive(tbl) {
     loadEach('archives', (file) => {
 
         tblArchive.row.add([
-            moment(file.LastModified).format('YYYY-MM-DD hh:mm:ss A'),
+            moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Project,
             file.Server,
             file.Version,
