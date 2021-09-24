@@ -62,7 +62,6 @@
                                         <tr>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -154,9 +153,8 @@
         tblBookmark.clear();
         bookmark.forEach((x) => { 
             tblBookmark.row.add([
-                x.name,
-                x.desc,
-                `<a href="${x.link}" class="btn btn-primary btn-sm" role="button" target="_self">Go</a>`
+                `<a href="${x.link}" class="btn btn-primary btn-sm" role="button" target="_self">${x.name}</a>`,
+                x.desc
             ]);
             tblBookmark.draw();
         });
