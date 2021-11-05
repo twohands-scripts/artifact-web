@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-bookmark-tab" data-bs-toggle="pill" data-bs-target="#pills-bookmark" type="button" role="tab" aria-controls="pills-bookmark" aria-selected="true">Bookmark</button>
+                            <button class="nav-link" id="pills-bookmark-tab" data-bs-toggle="pill" data-bs-target="#pills-bookmark" type="button" role="tab" aria-controls="pills-bookmark" aria-selected="true">Bookmark</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-apks-tab" data-bs-toggle="pill" data-bs-target="#pills-apks" type="button" role="tab" aria-controls="pills-apks" aria-selected="true">APK</button>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-bookmark" role="tabpanel" aria-labelledby="pills-bookmark-tab">
+                        <div class="tab-pane fade" id="pills-bookmark" role="tabpanel" aria-labelledby="pills-bookmark-tab">
                             <div style="overflow:auto">
                                 <table id="tblBookmark" class="table table-dark table-striped">
                                     <thead>
@@ -114,6 +114,8 @@
 
 <script>
 
+    const tabs = ['pills-bookmark', 'pills-apks', 'pills-artifact'];
+
     const tblBookmark = $('#tblBookmark').DataTable({
         searching: false,
         lengthChange: false,
@@ -143,9 +145,31 @@
         order: [[ 0, 'desc' ]]
     });
 
+    let storage = window.sessionStorage;
+
     $(document).ready(function() {
 
+        activeTab(storage.latestTab);
+        console.log(`latestTab: ${storage.latestTab}`);
         refresh();
+    });
+
+    $('#pills-bookmark-tab').on('click', () => {
+
+        storage.latestTab = 'pills-bookmark';
+        console.log('click pills-bookmark');
+    });
+
+    $('#pills-apks-tab').on('click', () => {
+
+        storage.latestTab = 'pills-apks';
+        console.log('click pills-apks');
+    });
+
+    $('#pills-artifact-tab').on('click', () => {
+
+        storage.latestTab = 'pills-artifact';
+        console.log('click pills-artifact');
     });
 
     async function refresh() {
@@ -160,8 +184,22 @@
         });
 
         loadPaks(tblApks);
-        loadArchive(tblArchive);
+        loadArchive(tblArchive, storage);
     }
+
+    function activeTab(tabId) {
+
+        tabs.forEach((tab) => { 
+            $(`#${tab}`).removeClass('active show'); 
+            $(`#${tab}-tab`).removeClass('active'); 
+        });
+
+        tabId = tabId ?? 'pills-bookmark';
+
+        $(`#${tabId}`).addClass('active show');
+        $(`#${tabId}-tab`).addClass('active');
+    }
+
 </script>
 
 </html>
