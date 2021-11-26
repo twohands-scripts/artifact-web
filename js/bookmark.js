@@ -29,10 +29,20 @@ const bookmark = [
         link: 'http://qa-sysop.d-aws.twohandsgames.com:38110',
         desc: '챔스 QA 서버 운영툴'
     },
+	{
+        name: '[Golf] QA 서버 운영툴',
+        link: 'http://qa-sysop.d-aws.twohandsgames.com:41000',
+        desc: '골프 QA 개발 서버 운영툴'
+    },
     {
         name: '[Champs] Pub 서버 운영툴',
         link: 'http://pub-sysop.d-aws.twohandsgames.com:18110',
         desc: '챔스 Pub 서버 운영툴'
+    },
+	{
+        name: '[Golf] Pub 서버 운영툴',
+        link: 'http://qa-sysop.d-aws.twohandsgames.com:51000',
+        desc: '골프 Pub 개발 서버 운영툴'
     },
     {
         name: '[Champs] Live 서버 운영툴',
