@@ -63,6 +63,7 @@ async function loadEach(Prefix, cb) {
                 Project: Metadata.project ?? '', 
                 Platform: Metadata.platform ?? '', 
                 Server: Metadata.server ?? '', 
+                ServiceArea: Metadata.servicearea ?? null,
                 Name: name, 
                 Version: Metadata.version ?? '', 
                 LastModified, 
@@ -84,12 +85,17 @@ async function loadPaks(tbl) {
         if (file.Platform === 'iOS') {
             file.Link = `itms-services://?action=download-manifest&url=`;
             file.Link += `${awsS3Url}/${Bucket}/paks/${file.Project.toLowerCase()}`;
-            file.Link += `/${file.Server}/ios/Info.plist`;
+            if (file.ServiceArea) {
+                file.Link += `/${file.Server}/ios/${file.ServiceArea}-Info.plist`;
+            } else {
+                file.Link += `/${file.Server}/ios/Info.plist`;
+            }
         }
 
         tbl.row.add([
             file.Project,
             `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`,
+            `${file.ServiceArea || ''}`,
             `[${file.Server}] ${file.Platform}_${file.Version}`,
             moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Size
@@ -108,6 +114,7 @@ async function loadArchive(tbl) {
         tblArchive.row.add([
             moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Project,
+            `${file.ServiceArea || ''}`,
             file.Server,
             file.Version,
             file.Name,
