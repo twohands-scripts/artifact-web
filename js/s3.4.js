@@ -59,11 +59,16 @@ async function loadEach(Prefix, cb) {
             const Link = `${awsS3Url}/${Bucket}/${Key}`;
             const { Metadata } = await runCommand('headObject', { Key: file.Key });
 
+            if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
+                Metadata.androidstore = 'PlayStore';
+            }
+
             cb({ 
                 Project: Metadata.project ?? '', 
                 Platform: Metadata.platform ?? '', 
                 Server: Metadata.server ?? '', 
-                ServiceArea: Metadata.servicearea ?? null,
+                ServiceArea: Metadata.servicearea ?? 'Global',
+                Store: Metadata.androidstore ?? 'Apple',
                 Name: name, 
                 Version: Metadata.version ?? '', 
                 LastModified, 
@@ -76,11 +81,15 @@ async function loadEach(Prefix, cb) {
     } while(isTruncated);
 }
 
-async function loadPaks(tbl) {
+async function loadPaks(tbl, project) {
 
     tbl.clear();
 
     loadEach('paks', (file) => {
+
+        if (file.Project != project) {
+            return;
+        }
 
         if (file.Platform === 'iOS') {
             file.Link = `itms-services://?action=download-manifest&url=`;
@@ -92,11 +101,12 @@ async function loadPaks(tbl) {
             }
         }
 
+        const btnTxt = `[${file.Server}] ${file.Project}_${file.ServiceArea}_${file.Store}`;
         tbl.row.add([
-            file.Project,
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Install</a>`,
-            `${file.ServiceArea || ''}`,
-            `[${file.Server}] ${file.Platform}_${file.Version}`,
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
+            file.Server,
+            file.Platform,
+            file.Version,
             moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Size
         ]);
@@ -114,14 +124,16 @@ async function loadArchive(tbl) {
         tblArchive.row.add([
             moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
             file.Project,
-            `${file.ServiceArea || ''}`,
+            file.ServiceArea,
+            file.Store,
             file.Server,
             file.Version,
-            file.Name,
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${file.Name}</a>`,
             file.Size,
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">Download</a>`
         ]);
 
         tbl.draw();
     });
 }
+
+// cSpell: ignore androidstore servicearea twohandsgames

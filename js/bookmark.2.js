@@ -56,7 +56,7 @@ const bookmark = [
     },
     {
         name: 'Jenkins',
-        link: 'http://jenkins.twohandsgames.com:8080',
+        link: 'http://build.twohandsgames.com:38081/',
         desc: '빌드 서버'
     },
     {
