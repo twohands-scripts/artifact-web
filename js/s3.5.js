@@ -81,13 +81,13 @@ async function loadEach(Prefix, cb) {
     } while(isTruncated);
 }
 
-async function loadPaks(tbl, project) {
+async function loadPaks(tbl, projects) {
 
     tbl.clear();
 
     loadEach('paks', (file) => {
 
-        if (file.Project != project) {
+        if (projects.indexOf(file.Project) < 0) {
             return;
         }
 
