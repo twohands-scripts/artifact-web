@@ -81,13 +81,13 @@ async function loadEach(Prefix, cb) {
     } while(isTruncated);
 }
 
-async function loadPaks(tbl, projects) {
+async function loadPaks(tbl, project) {
 
     tbl.clear();
 
     loadEach('paks', (file) => {
 
-        if (projects.indexOf(file.Project) < 0) {
+        if (file.Project.indexOf(project) < 0) {
             return;
         }
 
@@ -107,15 +107,15 @@ async function loadPaks(tbl, projects) {
             }
         }
 
-        const btnTxt = `[${file.Server}] ${file.Project}_${file.ServiceArea}_${file.Store}`;
+        const btnTxt = 'Download';
         tbl.row.add([
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
-            file.Server,
+            moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
+            file.Project,
             file.ServiceArea,
             file.Store,
-            file.Platform,
+            file.Server,
             file.Version,
-            moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
             file.Size
         ]);
 

@@ -29,7 +29,7 @@
     <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>    
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.979.0.min.js"></script>
     <script src="js/moment.2.29.1.min.js"></script>
-    <script src="js/s3.6.js"></script>
+    <script src="js/s3.8.js"></script>
     <script src="js/bookmark.2.js"></script>
 </head>
 
@@ -78,13 +78,13 @@
                                 <table id="tblChampsApks" class="table table-dark table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Download</th>
-                                            <th scope="col">Server</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Project</th>
                                             <th scope="col">ServiceArea</th>
                                             <th scope="col">Store</th>
-                                            <th scope="col">OS</th>
+                                            <th scope="col">Server</th>
                                             <th scope="col">Version</th>
-                                            <th scope="col">Build</th>
+                                            <th scope="col">Name</th>
                                             <th scope="col">Size</th>
                                         </tr>
                                     </thead>
@@ -98,13 +98,13 @@
                                 <table id="tblGolfApks" class="table table-dark table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Download</th>
-                                            <th scope="col">Server</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Project</th>
                                             <th scope="col">ServiceArea</th>
                                             <th scope="col">Store</th>
-                                            <th scope="col">OS</th>
+                                            <th scope="col">Server</th>
                                             <th scope="col">Version</th>
-                                            <th scope="col">Build</th>
+                                            <th scope="col">Name</th>
                                             <th scope="col">Size</th>
                                         </tr>
                                     </thead>
@@ -162,7 +162,7 @@
         ordering: true,
         autoWidth: false,
         paging: false,
-        order: [[ 6, 'desc' ]]
+        order: [[ 0, 'desc' ]]
     });
 
     const tblGolfApks = $('#tblGolfApks').DataTable({
@@ -172,7 +172,7 @@
         ordering: true,
         autoWidth: false,
         paging: false,
-        order: [[ 6, 'desc' ]]
+        order: [[ 0, 'desc' ]]
     });
 
     const tblArchive = $('#tblArchive').DataTable({
@@ -229,8 +229,8 @@
             tblBookmark.draw();
         });
 
-        loadPaks(tblChampsApks, [ 'Champs' ]);
-        loadPaks(tblGolfApks, [ 'Golf'] );
+        loadPaks(tblChampsApks, 'Champs');
+        loadPaks(tblGolfApks, 'Golf');
         loadArchive(tblArchive, storage);
     }
 
