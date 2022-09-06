@@ -56,6 +56,7 @@ async function loadEach(Prefix, cb) {
             }
 
             const name = file.Key.slice(file.Key.lastIndexOf('/') + 1).trim();
+            const ext = (name.match(/^.*\.(\w+)$/))[1] || '';
             const Link = `${awsS3Url}/${Bucket}/${Key}`;
             const { Metadata } = await runCommand('headObject', { Key: file.Key });
 
@@ -67,9 +68,11 @@ async function loadEach(Prefix, cb) {
                 Project: Metadata.project ?? '', 
                 Platform: Metadata.platform ?? '', 
                 Server: Metadata.server ?? '', 
+                BuildNumber: Metadata.buildnumber ?? 0, 
                 ServiceArea: Metadata.servicearea ?? 'Global',
                 Store: Metadata.androidstore ?? 'Apple',
                 Name: name, 
+                Ext: ext.toUpperCase(),
                 Version: Metadata.version ?? '', 
                 LastModified, 
                 Size: toSize(Size), 
@@ -115,6 +118,7 @@ async function loadPaks(tbl, project) {
             file.Store,
             file.Server,
             file.Version,
+            file.BuildNumber,
             `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
             file.Size
         ]);
@@ -136,7 +140,8 @@ async function loadArchive(tbl) {
             file.Store,
             file.Server,
             file.Version,
-            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${file.Name}</a>`,
+            file.BuildNumber,
+            `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${file.Ext} Download</a>`,
             file.Size,
         ]);
 
