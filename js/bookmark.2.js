@@ -15,39 +15,59 @@ const bookmark = [
         desc: '챔스 라이브 실시간 로그 Kibana'
     },
     {
-        name: '[Champs] Dev 서버 운영툴',
-        link: 'http://qa-sysop.d-aws.twohandsgames.com:28110',
-        desc: '챔스 개발 서버 운영툴'
+        name: '[Champs-Global] Dev 서버 운영툴',
+        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:29110',
+        desc: '챔스 글로벌 개발 서버 운영툴'
+    },
+    {
+        name: '[Champs-Global] QA 서버 운영툴',
+        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:39110',
+        desc: '챔스 글로벌 QA 서버 운영툴'
+    },
+    {
+        name: '[Champs-Global] Pub 서버 운영툴',
+        link: 'http://pub-sysop.x-aws.twohandsgames.com:18110',
+        desc: '챔스 글로벌 Pub 서버 운영툴'
+    },
+    {
+        name: '[Champs-Global] Live 서버 운영툴',
+        link: 'http://live.sysop.champs.twohandsgames.com:28110/',
+        desc: '챔스 live 서버 운영툴'
+    },
+    {
+        name: '[Champs-PNE] Dev 서버 운영툴',
+        link: 'http://pne-dev.sysop.x-aws.twohandsgames.com:28110',
+        desc: '챔스 PNE 개발 서버 운영툴'
+    },
+    {
+        name: '[Champs-PNE] QA 서버 운영툴',
+        link: 'http://pne-dev.sysop.x-aws.twohandsgames.com:38110',
+        desc: '챔스 PNE QA 서버 운영툴'
+    },
+    {
+        name: '[Champs-PNE] Pub 서버 운영툴',
+        link: 'http://pne-pub.sysop.x-aws.twohandsgames.com:19110',
+        desc: '챔스 PNE Pub 서버 운영툴'
+    },
+    {
+        name: '[Champs-PNE] Live 서버 운영툴',
+        link: 'http://pne-live.sysop.champs.twohandsgames.com:29110',
+        desc: '챔스 PNE 서버 운영툴'
     },
     {
         name: '[Golf] Dev 서버 운영툴',
         link: 'http://qa-sysop.d-aws.twohandsgames.com:11000',
         desc: '골프 사내 개발 서버 운영툴'
     },
-    {
-        name: '[Champs] QA 서버 운영툴',
-        link: 'http://qa-sysop.d-aws.twohandsgames.com:38110',
-        desc: '챔스 QA 서버 운영툴'
-    },
 	{
         name: '[Golf] QA 서버 운영툴',
         link: 'http://qa-sysop.d-aws.twohandsgames.com:41000',
         desc: '골프 QA 개발 서버 운영툴'
     },
-    {
-        name: '[Champs] Pub 서버 운영툴',
-        link: 'http://pub-sysop.d-aws.twohandsgames.com:18110',
-        desc: '챔스 Pub 서버 운영툴'
-    },
 	{
         name: '[Golf] Pub 서버 운영툴',
         link: 'http://qa-sysop.d-aws.twohandsgames.com:51000',
         desc: '골프 Pub 개발 서버 운영툴'
-    },
-    {
-        name: '[Champs] Live 서버 운영툴',
-        link: 'http://live-sysop.d-aws.twohandsgames.com:28110',
-        desc: '챔스 live 서버 운영툴'
     },
     {
         name: '두손일보',

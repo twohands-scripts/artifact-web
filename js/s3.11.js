@@ -96,16 +96,17 @@ async function loadPaks(tbl, project) {
 
         if (file.Platform === 'iOS') {
             file.Link = `itms-services://?action=download-manifest&url=`;
-            file.Link += `${awsS3Url}/${Bucket}/paks/${file.Project.toLowerCase()}`;
+            file.Link += `${awsS3Url}/${Bucket}/paks`;
 
             if (file.Project === 'Golf') {
-                file.Link += `/${file.Server}/ios/Info.plist`;
+                file.Link += `/${file.Project.toLowerCase()}/${file.Server}/ios/Info.plist`;
             }
             else {
-                if (file.ServiceArea) {
-                    file.Link += `/${file.Server}/ios/${file.ServiceArea}-Info.plist`;
-                } else {
-                    file.Link += `/${file.Server}/ios/Info.plist`;
+                if (file.Project === 'Champs_Org') {
+                    file.Link += `/champs/${file.Server}/ios/Info.plist`;
+                }
+                else {
+                    file.Link += `/${file.Project.toLowerCase()}/${file.Server}/ios/${file.ServiceArea}-Info.plist`;
                 }
             }
         }
