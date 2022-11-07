@@ -10,9 +10,34 @@ const bookmark = [
         desc: '챔스 사업 통계용 Kibana. 2달간 로그 보관'
     },
     {
-        name: '[Champs] Live Kibana',
+        name: '[CS] Live Kibana',
         link: 'https://c052933cb78441c1869a90d2d53a7d2d.us-west-2.aws.found.io:9243/app/kibana',
-        desc: '챔스 라이브 실시간 로그 Kibana'
+        desc: 'CS(Original) 라이브 실시간 로그 Kibana'
+    },
+    {
+        name: '[CSC] Live Kibana',
+        link: 'https://es-d-all.kb.us-west-2.aws.found.io:9243/app/home#/',
+        desc: 'CSC(PNE) 라이브 실시간 로그 Kibana'
+    },
+    {
+        name: '[CS] KPI Dashboard',
+        link: 'https://datastudio.google.com/u/1/reporting/233970a7-f40c-4fd6-a494-da9459649fde/page/jwfcB',
+        desc: 'CS(Original) BigQuery 기반 통계 사이트'
+    },
+    {
+        name: '[CS] Matching Dashboard',
+        link: 'https://datastudio.google.com/u/1/reporting/dea38fdc-99e7-4c76-96b1-c710fa6bf981/page/7MA2B',
+        desc: 'CSC(Original) BigQuery 기반 통계 사이트'
+    },
+    {
+        name: '[CSC] KPI Dashboard',
+        link: 'https://datastudio.google.com/reporting/94eb4dd1-a8e9-4b1c-ab2c-b622db49dfc4',
+        desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
+    },
+    {
+        name: '[CSC] Matching Dashboard',
+        link: 'https://datastudio.google.com/reporting/3b4c4a1e-dac1-4877-a4e3-bf32b52b4fd0',
+        desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
     },
     {
         name: '[Champs-Global] Dev 서버 운영툴',
