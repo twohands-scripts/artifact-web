@@ -27,7 +27,7 @@ const bookmark = [
     {
         name: '[CS] Matching Dashboard',
         link: 'https://datastudio.google.com/u/1/reporting/dea38fdc-99e7-4c76-96b1-c710fa6bf981/page/7MA2B',
-        desc: 'CSC(Original) BigQuery 기반 통계 사이트'
+        desc: 'CS(Original) BigQuery 기반 통계 사이트'
     },
     {
         name: '[CSC] KPI Dashboard',
@@ -41,17 +41,17 @@ const bookmark = [
     },
     {
         name: '[Champs-Global] Dev 서버 운영툴',
-        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:29110',
+        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:27110',
         desc: '챔스 글로벌 개발 서버 운영툴'
     },
     {
         name: '[Champs-Global] QA 서버 운영툴',
-        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:39110',
+        link: 'http://global-dev.sysop.x-aws.twohandsgames.com:37110',
         desc: '챔스 글로벌 QA 서버 운영툴'
     },
     {
         name: '[Champs-Global] Pub 서버 운영툴',
-        link: 'http://pub-sysop.x-aws.twohandsgames.com:18110',
+        link: 'http://pub-sysop.x-aws.twohandsgames.com:17110',
         desc: '챔스 글로벌 Pub 서버 운영툴'
     },
     {
