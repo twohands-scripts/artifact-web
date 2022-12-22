@@ -1,0 +1,26 @@
+{
+  "name": "@twohandsgames/s3browser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "maker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twohands-scripts/s3browser.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twohands-scripts/s3browser/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "twohandsgames.com",
+  "dependencies": {
+    "aws-sdk": "^2.1280.0",
+    "lodash.pick": "^4.4.0"
+  }
+}

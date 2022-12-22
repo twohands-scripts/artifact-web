@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "maker",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "runtimeArgs": [
+                "--nolazy", "--expose-gc"
+            ],
+            "program": "${workspaceFolder}\\maker.js",
+            "env": {
+                "NODE_ENV": "development",
+                "NODE_PENDING_DEPRECATION": "1",
+                "THG_RUN_LEVEL": "${env:USERNAME}${env:USER}",
+                "THG_VERSION": "https://rlva2ntue2.execute-api.us-west-2.amazonaws.com"
+            },
+            "console": "internalConsole",
+            "outputCapture": "std",
+            "sourceMaps": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "skipFiles": [
+                "node_moduels/**/*.js"
+            ]
+        }
+    ]
+}

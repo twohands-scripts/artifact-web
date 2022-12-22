@@ -1,7 +1,21 @@
 {
+    "git.ignoreLimitWarning": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.mouseWheelZoom": true,
     "cSpell.words": [
         "apks",
         "paks",
         "itms"
     ],
+    "cSpell.ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        ".vscode",
+        "public",
+        "templates",
+        "package.json",
+        "package-lock.json",
+    ],
+    "editor.guides.indentation": true
 }

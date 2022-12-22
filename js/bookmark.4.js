@@ -5,38 +5,28 @@ const bookmark = [
         desc: 'dev, qa, pub Kibana'
     },
     {
-        name: '[Champs] Biz Kibana',
-        link: 'http://es-biz.x-aws.twohandsgames.com:5601/app/kibana',
-        desc: '챔스 사업 통계용 Kibana. 2달간 로그 보관'
-    },
-    {
-        name: '[CS] Live Kibana',
-        link: 'https://c052933cb78441c1869a90d2d53a7d2d.us-west-2.aws.found.io:9243/app/kibana',
-        desc: 'CS(Original) 라이브 실시간 로그 Kibana'
-    },
-    {
-        name: '[CSC] Live Kibana',
+        name: '[CSC/CS] Live Kibana',
         link: 'https://es-d-all.kb.us-west-2.aws.found.io:9243/app/home#/',
-        desc: 'CSC(PNE) 라이브 실시간 로그 Kibana'
+        desc: 'CSC / CS 라이브 실시간 로그 Kibana'
     },
     {
-        name: '[CS] KPI Dashboard',
-        link: 'https://datastudio.google.com/u/1/reporting/233970a7-f40c-4fd6-a494-da9459649fde/page/jwfcB',
+        name: '[CS] Daily KPI Dashboard',
+        link: 'https://datastudio.google.com/u/1/reporting/ea698d29-7e23-4348-9766-0f334adf5f33',
         desc: 'CS(Original) BigQuery 기반 통계 사이트'
     },
     {
         name: '[CS] Matching Dashboard',
-        link: 'https://datastudio.google.com/u/1/reporting/dea38fdc-99e7-4c76-96b1-c710fa6bf981/page/7MA2B',
+        link: 'https://datastudio.google.com/u/1/reporting/f49406f6-f7f7-4cb8-b784-f0eb29edad96',
         desc: 'CS(Original) BigQuery 기반 통계 사이트'
     },
     {
-        name: '[CSC] KPI Dashboard',
-        link: 'https://datastudio.google.com/reporting/94eb4dd1-a8e9-4b1c-ab2c-b622db49dfc4',
+        name: '[CSC] Daily KPI Dashboard',
+        link: 'https://datastudio.google.com/u/1/reporting/bdf95039-439e-4909-a87a-ee5189ce2cac',
         desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
     },
     {
         name: '[CSC] Matching Dashboard',
-        link: 'https://datastudio.google.com/reporting/3b4c4a1e-dac1-4877-a4e3-bf32b52b4fd0',
+        link: 'https://datastudio.google.com/u/1/reporting/3b4c4a1e-dac1-4877-a4e3-bf32b52b4fd0',
         desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
     },
     {
@@ -95,14 +85,19 @@ const bookmark = [
         desc: '골프 Pub 개발 서버 운영툴'
     },
     {
-        name: '두손일보',
-        link: 'http://blog.twohandsgames.com',
-        desc: '사내 블로그'
+        name: 'THG Wiki',
+        link: 'https://wiki.twohandsgames.com/',
+        desc: '위키'
     },
     {
         name: 'Jenkins',
         link: 'http://build.twohandsgames.com:38081/',
         desc: '빌드 서버'
+    },
+    {
+        name: '두손일보',
+        link: 'http://blog.twohandsgames.com',
+        desc: '사내 블로그'
     },
     {
         name: 'ASO History',
