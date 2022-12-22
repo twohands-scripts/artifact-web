@@ -9,7 +9,8 @@ const internals = {
     s3: new S3({ apiVersion: '2006-03-01', region: 'us-west-2' }),
     Bucket: 'artifact.x-aws.twohandsgames.com',
     awsS3Url: 'https://s3.us-west-2.amazonaws.com',
-    list: new Map()
+    list: new Map(),
+    meta: new Map()
 };
 
 async function runCommand(cmd, params) {
@@ -55,11 +56,13 @@ async function refresh(list) {
     internals.list = new Map(Array.from(list, (r) => { return [ r.Key, r ]}));
     internals.list.forEach(async (r) => {
 
-        if (!r.meta) {
-            r.meta = await runCommand('headObject', { Key: r.Key });
+        let meta = internals.meta.get(r.Key);
+        if (!meta) {
+            meta = await runCommand('headObject', { Key: r.Key });
+            internals.meta.set(r.Key, meta);
         }
 
-        const info = _pick(Object.assign(r, r.meta), ['project', 'platform', 'buildnumber', 'servicearea', 'androidstore', 'name', 'version', 'LastModified', 'Size', 'StorageClass']);
+        const info = _pick(Object.assign(r, meta), ['project', 'platform', 'buildnumber', 'servicearea', 'androidstore', 'name', 'version', 'LastModified', 'Size', 'StorageClass']);
         const type = r.Key.split('/');
 
         info.Link = `${awsS3Url}/${Bucket}/${Key}`;
@@ -87,10 +90,11 @@ async function refresh(list) {
 async function main() {
 
     const list = await listObjects();
-
-    if (list.length !== internals.list.size) {
-        refresh(list);
+    if (list.length === internals.list.size) {
+        return;
     }
+
+    const res = await refresh(list);
 }
 
 main();
