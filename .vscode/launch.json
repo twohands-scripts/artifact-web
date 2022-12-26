@@ -13,7 +13,7 @@
             "runtimeArgs": [
                 "--nolazy", "--expose-gc"
             ],
-            "program": "${workspaceFolder}\\maker.js",
+            "program": "${workspaceFolder}\\index.js",
             "env": {
                 "NODE_ENV": "development",
                 "NODE_PENDING_DEPRECATION": "1",
