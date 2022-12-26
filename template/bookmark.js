@@ -1,4 +1,4 @@
-const bookmark = [
+module.exports = [
     {
         name: 'Dev / QA / Pub Kibana',
         link: 'http://es-dev.x-aws.twohandsgames.com:5601/app/kibana',
@@ -114,5 +114,4 @@ const bookmark = [
         link: 'https://sites.google.com/twohandsgames.com/champion-strike-data-bank/%ED%99%88?authuser=1',
         desc: '데이터 분석 대시보드 모음'
     }
-
-]
+];

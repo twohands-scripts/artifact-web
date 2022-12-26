@@ -3,6 +3,8 @@
 const { S3 } = require('aws-sdk');
 const path = require('path');
 const _pick = require('lodash.pick');
+const { readFile } = require('fs/promises');
+const { CronJob: cron } = require('cron');
 
 
 const internals = {
@@ -30,6 +32,14 @@ async function runCommand(cmd, params) {
     });
 }
 
+function toSize(bytes) {
+
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+}
+
 async function listObjects() {
 
     let keys = [];
@@ -37,7 +47,7 @@ async function listObjects() {
     do {
 
         const res = await runCommand('listObjectsV2', { ContinuationToken: next });
-        keys = keys.concat(res.Contents.filter(r => r.Size > 0 && r.StorageClass === 'STANDARD'));
+        keys = keys.concat(res.Contents.filter(r => r.Size > 0 && r.StorageClass === 'STANDARD' && r.Key.indexOf('Info.plist') === -1));
         next = res.IsTruncated ? res.NextContinuationToken : null;
 
     } while(next);
@@ -54,23 +64,52 @@ async function refresh(list) {
     const archiveApksList = [];
 
     internals.list = new Map(Array.from(list, (r) => { return [ r.Key, r ]}));
-    internals.list.forEach(async (r) => {
 
+    for (const [k, r] of internals.list) {
         let meta = internals.meta.get(r.Key);
         if (!meta) {
-            meta = await runCommand('headObject', { Key: r.Key });
+            const { Metadata } = await runCommand('headObject', { Key: r.Key });
+            if (!Metadata.project) {
+                continue;
+            }
+
+            if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
+                Metadata.androidstore = 'PlayStore';
+            }
+
+            meta = Metadata;
             internals.meta.set(r.Key, meta);
         }
 
-        const info = _pick(Object.assign(r, meta), ['project', 'platform', 'buildnumber', 'servicearea', 'androidstore', 'name', 'version', 'LastModified', 'Size', 'StorageClass']);
         const type = r.Key.split('/');
+        const info = _pick(Object.assign(r, meta), [
+            'project', 'platform', 'buildnumber', 'server', 'servicearea',
+            'androidstore', 'name', 'version', 'LastModified', 'Size', 'StorageClass'
+        ]);
 
-        info.Link = `${awsS3Url}/${Bucket}/${Key}`;
+        info.link = `${internals.awsS3Url}/${internals.Bucket}/${r.Key}`;
         info.name = path.basename(r.Key);
         info.ext = path.extname(info.name);
+        info.store = meta.androidstore ?? 'Apple';
+        info.size = toSize(info.Size);
+
+        if (info.platform === 'iOS') {
+            info.link = `itms-services://?action=download-manifest&url=${internals.awsS3Url}/${internals.Bucket}/paks`;
+            if (info.project === 'Golf') {
+                info.link += `/${info.project.toLowerCase()}/${info.server}/ios/Info.plist`;
+            }
+            else {
+                if (info.project === 'Champs_Org') {
+                    info.link += `/champs/${info.server}/ios/Info.plist`;
+                }
+                else {
+                    info.link += `/${info.project.toLowerCase()}/${info.server}/ios/${info.servicearea}-Info.plist`;
+                }
+            }
+        }
 
         if (type[0]) {
-            if (type[0] === 'archive') {
+            if (type[0] === 'archives') {
                 archiveApksList.push(info);
             }
             else if (type[0] === 'paks') {
@@ -82,19 +121,37 @@ async function refresh(list) {
                 }
             }
         }
-    });
+    };
 
     return { champsApksList, golfApksList, archiveApksList };
 }
 
 async function main() {
 
-    const list = await listObjects();
-    if (list.length === internals.list.size) {
-        return;
-    }
+    new cron('*/10 * * * * *', async () => {
 
-    const res = await refresh(list);
+        const list = await listObjects();
+        if (list.length === internals.list.size) {
+            return;
+        }
+
+        console.log(`refresh start - ${list.length - internals.list.size}`);
+
+        const bookmark = require('./template/bookmark');
+        const res = await refresh(list);
+
+        let contents = await readFile('./template/index.html', { encoding: 'utf-8' });
+        contents = contents.replace('{{bookmark}}', `const bookmark = ${JSON.stringify(bookmark)};`);
+        contents = contents.replace('{{champsApksList}}', `const champsApksList = ${JSON.stringify(res.champsApksList)};`);
+        contents = contents.replace('{{golfApksList}}', `const golfApksList = ${JSON.stringify(res.golfApksList)};`);
+        contents = contents.replace('{{archiveApksList}}', `const archiveApksList = ${JSON.stringify(res.archiveApksList)};`);
+
+        await runCommand('putObject', { Body: contents, Key: 'index.html', ContentType: 'text/html', CacheControl: 'no-cache,no-store' });
+        console.log('refresh completed');
+
+    }, null, true, 'Asia/Seoul');
 }
 
 main();
+
+// cSpell: ignore buildnumber servicearea androidstore

@@ -26,11 +26,8 @@
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
 
-    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>    
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.979.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
     <script src="js/moment.2.29.1.min.js"></script>
-    <script src="js/s3.12.js"></script>
-    <script src="js/bookmark.3.js"></script>
 </head>
 
 <body>
@@ -147,6 +144,7 @@
 
     const tabs = ['pills-bookmark', 'pills-apks', 'pills-artifact'];
 
+    {{bookmark}}
     {{champsApksList}}
     {{golfApksList}}
     {{archiveApksList}}
@@ -227,7 +225,7 @@
     async function refresh() {
 
         tblBookmark.clear();
-        bookmark.forEach((x, i) => { 
+        bookmark.forEach((x, i) => {
             tblBookmark.row.add([
                 i,
                 `<a href="${x.link}" class="btn btn-primary btn-sm" role="button" target="_self">${x.name}</a>`,
@@ -250,23 +248,23 @@
             const btnTxt = text || `${file.Ext} Download`;
             table.row.add([
                 moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
-                file.Project,
-                file.ServiceArea,
-                file.Store,
-                file.Server,
-                file.Version,
-                file.BuildNumber,
-                `<a href="${file.Link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
-                file.Size
+                file.project,
+                file.servicearea,
+                file.platform,
+                file.server,
+                file.version,
+                file.buildnumber || '',
+                `<a href="${file.link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
+                file.size
             ]).draw();
         });
     }
 
     function activeTab(tabId) {
 
-        tabs.forEach((tab) => { 
-            $(`#${tab}`).removeClass('active show'); 
-            $(`#${tab}-tab`).removeClass('active'); 
+        tabs.forEach((tab) => {
+            $(`#${tab}`).removeClass('active show');
+            $(`#${tab}-tab`).removeClass('active');
         });
 
         tabId = tabId ?? 'pills-bookmark';

@@ -21,6 +21,7 @@
   "author": "twohandsgames.com",
   "dependencies": {
     "aws-sdk": "^2.1280.0",
+    "cron": "^2.1.0",
     "lodash.pick": "^4.4.0"
   }
 }
