@@ -245,7 +245,7 @@
 
         list.forEach((file) => {
 
-            const btnTxt = text || `${file.Ext} Download`;
+            const btnTxt = text || `${file.ext} Download`;
             table.row.add([
                 moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
                 file.project || '',
