@@ -1,5 +1,5 @@
 {
-  "name": "@twohandsgames/s3browser",
+  "name": "@twohands-scripts/artifact-web",
   "version": "1.0.0",
   "description": "",
   "main": "maker.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twohands-scripts/s3browser.git"
+    "url": "git+https://github.com/twohands-scripts/artifact-web.git"
   },
   "keywords": [],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/twohands-scripts/s3browser/issues"
+    "url": "https://github.com/twohands-scripts/artifact-web/issues"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
