@@ -248,11 +248,11 @@
             const btnTxt = text || `${file.Ext} Download`;
             table.row.add([
                 moment(file.LastModified).format('YYYY-MM-DD HH:mm:ss'),
-                file.project,
-                file.servicearea,
-                file.platform,
-                file.server,
-                file.version,
+                file.project || '',
+                file.servicearea || '',
+                file.platform || '',
+                file.server || '',
+                file.version || '',
                 file.buildnumber || '',
                 `<a href="${file.link}" class="btn btn-primary btn-sm" role="button" target="_blank">${btnTxt}</a>`,
                 file.size
