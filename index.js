@@ -47,8 +47,28 @@ async function listObjects() {
     do {
 
         const res = await runCommand('listObjectsV2', { ContinuationToken: next });
-        keys = keys.concat(res.Contents.filter(r => r.Size > 0 && r.StorageClass === 'STANDARD' && r.Key.indexOf('Info.plist') === -1));
         next = res.IsTruncated ? res.NextContinuationToken : null;
+        keys = keys.concat(res.Contents.filter((r) => {
+
+            if (r.Size === -1) {
+                return false;
+            }
+
+            if (r.StorageClass !== 'STANDARD') {
+                return false;
+            }
+
+            if (r.Key.indexOf('Info.plist') > 0 || r.Key.indexOf('index.html') > 0) {
+                return false;
+            }
+
+            const exist = internals.list.get(r.Key);
+            if (exist && exist.ETag !== r.ETag) {
+                return false;
+            }
+
+            return true;
+        }));
 
     } while(next);
 
