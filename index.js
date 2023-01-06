@@ -50,7 +50,7 @@ async function listObjects() {
         next = res.IsTruncated ? res.NextContinuationToken : null;
         keys = keys.concat(res.Contents.filter((r) => {
 
-            if (r.Size === -1) {
+            if (r.Size < 1) {
                 return false;
             }
 
@@ -77,28 +77,55 @@ async function listObjects() {
     return keys;
 }
 
+function sleep(time) {
+
+    return new Promise((resolve) => {
+
+        setTimeout(resolve, time);
+    });
+}
+
+function cleanup() {
+
+    const dummies = [];
+    internals.meta.forEach((r) => {
+
+        if (!internals.list.has(r.Key)) {
+            dummies.push(r.Key);
+        }
+    });
+
+    dummies.forEach((k) => { internals.meta.delete(k); });
+}
+
 async function refresh(list) {
 
     const champsApksList = [];
     const golfApksList = [];
     const archiveApksList = [];
 
-    internals.list = new Map(Array.from(list, (r) => { return [ r.Key, r ]}));
+    internals.list.clear();
 
-    for (const [k, r] of internals.list) {
+    for (const r of list) {
         let meta = internals.meta.get(r.Key);
-        if (!meta) {
-            const { Metadata } = await runCommand('headObject', { Key: r.Key });
-            if (!Metadata.project) {
+        if (!meta || (meta && meta.ETag !== r.ETag)) {
+            try {
+                const { Metadata } = await runCommand('headObject', { Key: r.Key });
+                if (!Metadata.project) {
+                    continue;
+                }
+
+                if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
+                    Metadata.androidstore = 'PlayStore';
+                }
+
+                meta = Object.assign(Metadata, { ETag: r.ETag });
+                internals.meta.set(r.Key, meta);
+            }
+            catch (error) {
+                console.log(JSON.stringify({ error, key: r.Key }, null, 2));
                 continue;
             }
-
-            if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
-                Metadata.androidstore = 'PlayStore';
-            }
-
-            meta = Metadata;
-            internals.meta.set(r.Key, meta);
         }
 
         const type = r.Key.split('/');
@@ -141,18 +168,21 @@ async function refresh(list) {
                 }
             }
         }
+
+        internals.list.set(r.Key, r);
     };
+
+    cleanup();
 
     return { champsApksList, golfApksList, archiveApksList };
 }
 
 async function main() {
 
-    new cron('*/10 * * * * *', async () => {
-
+    while (1) {
         const list = await listObjects();
         if (list.length === internals.list.size) {
-            return;
+            continue;
         }
 
         console.log(`refresh start - ${list.length - internals.list.size}`);
@@ -169,7 +199,8 @@ async function main() {
         await runCommand('putObject', { Body: contents, Key: 'index.html', ContentType: 'text/html', CacheControl: 'no-cache,no-store' });
         console.log('refresh completed');
 
-    }, null, true, 'Asia/Seoul');
+        await sleep(10000);
+    }
 }
 
 main();
