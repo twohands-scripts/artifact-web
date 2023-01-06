@@ -205,9 +205,9 @@ async function main() {
         else if (cap < 0) {
             internals.list.forEach((v, k) => {
 
-                const exist = list.find(r => r.Key === v);
+                const exist = list.find(r => r.Key === k);
                 if (!exist) {
-                    console.log(`pull - ${k.Key}`);
+                    console.log(`pull - ${v.Key}`);
                 }
             });
         }
