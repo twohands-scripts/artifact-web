@@ -4,7 +4,6 @@ const { S3 } = require('aws-sdk');
 const path = require('path');
 const _pick = require('lodash.pick');
 const { readFile } = require('fs/promises');
-const { CronJob: cron } = require('cron');
 
 
 const internals = {
@@ -205,6 +204,7 @@ async function main() {
         contents = contents.replace('{{champsApksList}}', `const champsApksList = ${JSON.stringify(res.champsApksList)};`);
         contents = contents.replace('{{golfApksList}}', `const golfApksList = ${JSON.stringify(res.golfApksList)};`);
         contents = contents.replace('{{archiveApksList}}', `const archiveApksList = ${JSON.stringify(res.archiveApksList)};`);
+        contents = contents.replace('{{last-updated}}', `Last Update: ${(new Date()).toLocaleString()}`);
 
         await runCommand('putObject', { Body: contents, Key: 'index.html', ContentType: 'text/html', CacheControl: 'no-cache,no-store' });
         console.log('refresh completed');
