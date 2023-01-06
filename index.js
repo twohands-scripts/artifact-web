@@ -194,6 +194,24 @@ async function main() {
             continue;
         }
 
+        const cap = list.length - internals.list.size;
+        if (cap > 0) {
+            list.forEach((r) => {
+                if (!internals.list.has(r.Key)) {
+                    console.log(`addable - ${r.Key}`);
+                }
+            });
+        }
+        else if (cap < 0) {
+            internals.list.forEach((v, k) => {
+
+                const exist = list.find(r => r.Key === v);
+                if (!exist) {
+                    console.log(`pull - ${k.Key}`);
+                }
+            });
+        }
+
         console.log(`refresh start - ${list.length - internals.list.size}`);
 
         const bookmark = require('./template/bookmark');
