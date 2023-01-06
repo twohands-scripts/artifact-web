@@ -117,7 +117,12 @@ async function refresh(list) {
             try {
                 const { Metadata } = await runCommand('headObject', { Key: r.Key });
                 if (!Metadata.project) {
-                    continue;
+                    if (r.Key.indexOf('champs') > 0) {
+                        Metadata.project = 'Champs';
+                    }
+                    else if (r.Key.indexOf('golf') > 0) {
+                        Metadata.project = 'Golf';
+                    }
                 }
 
                 if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
