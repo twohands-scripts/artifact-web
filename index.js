@@ -57,7 +57,7 @@ async function listObjects() {
                 return false;
             }
 
-            if (r.Key.indexOf('Info.plist') > 0 || r.Key.indexOf('index.html') > 0) {
+            if (r.Key.indexOf('Info.plist') > -1 || r.Key.indexOf('index.html') > -1) {
                 return false;
             }
 
@@ -192,24 +192,6 @@ async function main() {
         const list = await listObjects();
         if (list.length === internals.list.size) {
             continue;
-        }
-
-        const cap = list.length - internals.list.size;
-        if (cap > 0) {
-            list.forEach((r) => {
-                if (!internals.list.has(r.Key)) {
-                    console.log(`addable - ${r.Key}`);
-                }
-            });
-        }
-        else if (cap < 0) {
-            internals.list.forEach((v, k) => {
-
-                const exist = list.find(r => r.Key === k);
-                if (!exist) {
-                    console.log(`pull - ${v.Key}`);
-                }
-            });
         }
 
         console.log(`refresh start - ${list.length - internals.list.size}`);
