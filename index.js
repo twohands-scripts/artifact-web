@@ -62,6 +62,11 @@ async function listObjects() {
                 return false;
             }
 
+            const path = r.Key.split('/');
+            if (path[0] === 'img' || path[0] === 'js' || path[0] === 'latest') {
+                return false;
+            }
+
             const exist = internals.list.get(r.Key);
             if (exist && exist.ETag !== r.ETag) {
                 return false;
