@@ -189,6 +189,9 @@ async function refresh(list) {
 async function main() {
 
     while (1) {
+
+        await sleep(10000);
+
         const list = await listObjects();
         if (list.length === internals.list.size) {
             continue;
@@ -208,8 +211,6 @@ async function main() {
 
         await runCommand('putObject', { Body: contents, Key: 'index.html', ContentType: 'text/html', CacheControl: 'no-cache,no-store' });
         console.log('refresh completed');
-
-        await sleep(10000);
     }
 }
 
