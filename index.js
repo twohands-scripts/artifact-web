@@ -149,26 +149,26 @@ async function refresh(list) {
         info.store = meta.androidstore ?? 'Apple';
         info.size = toSize(info.Size);
 
-        if (info.platform === 'iOS' && info.ext === '.ipa') {
-            info.link = `itms-services://?action=download-manifest&url=${internals.awsS3Url}/${internals.Bucket}/paks`;
-            if (info.project === 'Golf') {
-                info.link += `/${info.project.toLowerCase()}/${info.server}/ios/Info.plist`;
-            }
-            else {
-                if (info.project === 'Champs_Org') {
-                    info.link += `/champs/${info.server}/ios/Info.plist`;
-                }
-                else {
-                    info.link += `/${info.project.toLowerCase()}/${info.server}/ios/${info.servicearea}-Info.plist`;
-                }
-            }
-        }
-
         if (type[0]) {
             if (type[0] === 'archives') {
                 archiveApksList.push(info);
             }
             else if (type[0] === 'paks') {
+                if (info.platform === 'iOS' && info.ext === '.ipa') {
+                    info.link = `itms-services://?action=download-manifest&url=${internals.awsS3Url}/${internals.Bucket}/paks`;
+                    if (info.project === 'Golf') {
+                        info.link += `/${info.project.toLowerCase()}/${info.server}/ios/Info.plist`;
+                    }
+                    else {
+                        if (info.project === 'Champs_Org') {
+                            info.link += `/champs/${info.server}/ios/Info.plist`;
+                        }
+                        else {
+                            info.link += `/${info.project.toLowerCase()}/${info.server}/ios/${info.servicearea}-Info.plist`;
+                        }
+                    }
+                }
+
                 if (type[1] === 'champs') {
                     champsApksList.push(info);
                 }
