@@ -81,7 +81,7 @@ module.exports = [
     },
 	{
         name: '[Golf] Pub 서버 운영툴',
-        link: 'http://qa-sysop.c-aws.twohandsgames.com:11000',
+        link: 'http://qa-sysop.x-aws.twohandsgames.com:11000',
         desc: '골프 Pub 개발 서버 운영툴'
     },
     {
