@@ -71,12 +71,12 @@ module.exports = [
     },
     {
         name: '[Golf] Dev 서버 운영툴',
-        link: 'http://qa-sysop.x-aws.twohandsgames.com:11000',
+        link: 'http://gsc.x-aws.twohandsgames.com:11000',
         desc: '골프 사내 개발 서버 운영툴'
     },
 	{
         name: '[Golf] QA 서버 운영툴',
-        link: 'http://qa-sysop.x-aws.twohandsgames.com:51000',
+        link: 'http://gsc.x-aws.twohandsgames.com:51000',
         desc: '골프 QA 개발 서버 운영툴'
     },
 	{
