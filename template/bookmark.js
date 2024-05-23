@@ -76,7 +76,7 @@ module.exports = [
     },
 	{
         name: '[Golf] QA 서버 운영툴',
-        link: 'http://qa-sysop.x-aws.twohandsgames.com:51000',
+        link: 'http://gsc.x-aws.twohandsgames.com:51000',
         desc: '골프 QA 개발 서버 운영툴'
     },
 	{
