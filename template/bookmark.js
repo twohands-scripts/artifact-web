@@ -50,26 +50,6 @@ module.exports = [
         desc: '챔스 live 서버 운영툴'
     },
     {
-        name: '[Champs-PNE] Dev 서버 운영툴',
-        link: 'http://pne-dev.sysop.x-aws.twohandsgames.com:28110',
-        desc: '챔스 PNE 개발 서버 운영툴'
-    },
-    {
-        name: '[Champs-PNE] QA 서버 운영툴',
-        link: 'http://pne-dev.sysop.x-aws.twohandsgames.com:38110',
-        desc: '챔스 PNE QA 서버 운영툴'
-    },
-    {
-        name: '[Champs-PNE] Pub 서버 운영툴',
-        link: 'http://pne-pub.sysop.x-aws.twohandsgames.com:19110',
-        desc: '챔스 PNE Pub 서버 운영툴'
-    },
-    {
-        name: '[Champs-PNE] Live 서버 운영툴',
-        link: 'http://pne-live.sysop.champs.twohandsgames.com:29110',
-        desc: '챔스 PNE 서버 운영툴'
-    },
-    {
         name: '[Golf] Dev 서버 운영툴',
         link: 'http://gsc.x-aws.twohandsgames.com:11000',
         desc: '골프 사내 개발 서버 운영툴'
@@ -91,13 +71,8 @@ module.exports = [
     },
     {
         name: 'Jenkins',
-        link: 'http://build.twohandsgames.com:38081/',
+        link: 'http://10.100.70.24:38081/',
         desc: '빌드 서버'
-    },
-    {
-        name: '두손일보',
-        link: 'http://blog.twohandsgames.com',
-        desc: '사내 블로그'
     },
     {
         name: 'ASO History',
