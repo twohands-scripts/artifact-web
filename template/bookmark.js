@@ -20,16 +20,6 @@ module.exports = [
         desc: 'CS(Original) BigQuery 기반 통계 사이트'
     },
     {
-        name: '[CSC] Daily KPI Dashboard',
-        link: 'https://datastudio.google.com/u/1/reporting/bdf95039-439e-4909-a87a-ee5189ce2cac',
-        desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
-    },
-    {
-        name: '[CSC] Matching Dashboard',
-        link: 'https://datastudio.google.com/u/1/reporting/3b4c4a1e-dac1-4877-a4e3-bf32b52b4fd0',
-        desc: 'CSC(PNE) BigQuery 기반 통계 사이트'
-    },
-    {
         name: '[Champs-Global] Dev 서버 운영툴',
         link: 'http://global-dev.sysop.x-aws.twohandsgames.com:27110',
         desc: '챔스 글로벌 개발 서버 운영툴'
