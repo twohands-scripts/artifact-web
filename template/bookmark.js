@@ -41,17 +41,17 @@ module.exports = [
     },
     {
         name: '[Golf] Dev 서버 운영툴',
-        link: 'http://gsc.x-aws.twohandsgames.com:11000',
+        link: 'http://dev-golfops.x-aws.twohandsgames.com:11000',
         desc: '골프 사내 개발 서버 운영툴'
     },
 	{
         name: '[Golf] QA 서버 운영툴',
-        link: 'http://gsc.x-aws.twohandsgames.com:51000',
+        link: 'http://dev-golfops.x-aws.twohandsgames.com:51000',
         desc: '골프 QA 개발 서버 운영툴'
     },
 	{
         name: '[Golf] Pub 서버 운영툴',
-        link: 'http://gsc.x-aws.twohandsgames.com:61000',
+        link: 'http://pub-golfops.x-aws.twohandsgames.com:11000',
         desc: '골프 Pub 개발 서버 운영툴'
     },
     {
