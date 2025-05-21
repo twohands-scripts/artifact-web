@@ -56,7 +56,7 @@ module.exports = [
     },
     {
         name: '[Golf] live 서버 운영툴',
-        link: 'http://golfops.live.twohandsgames.com:11000',
+        link: 'http://golfops.live.golfsupercrew.com:11000',
         desc: '골프 Live 서버 운영툴'
     },
     {
