@@ -55,6 +55,11 @@ module.exports = [
         desc: '골프 Pub 서버 운영툴'
     },
     {
+        name: '[Golf] Hotfix 서버 운영툴',
+        link: 'http://hotfix-golfops.x-aws.twohandsgames.com:11000',
+        desc: '골프 Hotfix 서버 운영툴'
+    },
+    {
         name: '[Golf] live 서버 운영툴',
         link: 'http://golfops.live.golfsupercrew.com:11000',
         desc: '골프 Live 서버 운영툴'
