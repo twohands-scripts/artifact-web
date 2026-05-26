@@ -190,7 +190,7 @@ async function main() {
 
     while (1) {
 
-        //await sleep(10000);
+        await sleep(10000);
 
         const list = await listObjects();
         if (list.length === internals.list.size) {
