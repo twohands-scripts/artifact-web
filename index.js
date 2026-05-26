@@ -124,8 +124,8 @@ async function refresh(list) {
                     }
                 }
 
-                if (!Metadata.androidstore && Metadata.platform !== 'iOS') {
-                    Metadata.androidstore = 'PlayStore';
+                if (!Metadata.store) {
+                    Metadata.store = Metadata.platform === 'iOS' ? 'AppStore' : 'PlayStore';
                 }
 
                 meta = Object.assign(Metadata, { ETag: r.ETag });
@@ -140,13 +140,13 @@ async function refresh(list) {
         const type = r.Key.split('/');
         const info = _pick(Object.assign(r, meta), [
             'project', 'platform', 'buildnumber', 'server', 'servicearea',
-            'androidstore', 'name', 'version', 'LastModified', 'Size', 'StorageClass'
+            'store', 'name', 'version', 'LastModified', 'Size', 'StorageClass'
         ]);
 
         info.link = `${internals.awsS3Url}/${internals.Bucket}/${r.Key}`;
         info.name = path.basename(r.Key);
         info.ext = path.extname(info.name);
-        info.store = meta.androidstore ?? 'Apple';
+        info.store = meta.store;
         info.size = toSize(info.Size);
 
         if (type[0]) {
@@ -190,7 +190,7 @@ async function main() {
 
     while (1) {
 
-        await sleep(10000);
+        //await sleep(10000);
 
         const list = await listObjects();
         if (list.length === internals.list.size) {
