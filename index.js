@@ -193,10 +193,6 @@ async function main() {
         await sleep(10000);
 
         const list = await listObjects();
-        if (list.length === internals.list.size) {
-            continue;
-        }
-
         console.log(`refresh start - ${list.length - internals.list.size}`);
 
         const bookmark = require('./template/bookmark');
