@@ -33,9 +33,9 @@ async function runCommand(cmd, params) {
 
 function toSize(bytes) {
 
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const sizes = ['Bytes', 'KB', 'MB'];
     if (bytes == 0) return '0 Byte';
-    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    const i = Math.min(parseInt(Math.floor(Math.log(bytes) / Math.log(1024))), 2);
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
