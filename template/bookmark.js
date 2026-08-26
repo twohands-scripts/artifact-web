@@ -1,7 +1,7 @@
 module.exports = [
     {
         name: 'Dev / QA / Pub Kibana',
-        link: 'http://es-dev.x-aws.twohandsgames.com:5601/app/kibana',
+        link: 'http://es-dev.x-aws.twohandsgames.com:5601',
         desc: 'dev, qa, pub Kibana'
     },
     {
