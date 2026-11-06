@@ -71,7 +71,7 @@ module.exports = [
     },
     {
         name: 'Jenkins',
-        link: 'http://10.100.70.24:38081/',
+        link: 'https://jenkins.x-aws.twohandsgames.com/',
         desc: '빌드 서버'
     },
     {
